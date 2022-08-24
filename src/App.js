@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+// layout
+import Layout from "./features/Layout";
+// notifications
+import { NotificationContainer } from "react-notifications";
+// notification css
+import "react-notifications/lib/notifications.css";
+// react router
+import { Route, Routes } from "react-router-dom";
+// importing habiit tab
+import HabitsTab from "./features/HabitsTab";
+// redux state management
+import { selectAllGoals } from "./features/Goals/goalSlice";
+import { useSelector } from "react-redux";
+// rendering app
 function App() {
+  const goals = useSelector(selectAllGoals);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="habits/:id" element={<HabitsTab goals={goals} />} />
+        </Route>
+      </Routes>
+      <NotificationContainer />
+    </>
   );
 }
 
