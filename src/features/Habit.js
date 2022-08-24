@@ -25,7 +25,7 @@ const Habit = ({ habit, id }) => {
   const [onEditTime, setOnEditTime] = useState(false);
   useEffect(() => {
     dispatch(editTime({ id, time }));
-  }, [setTime]);
+  }, [setTime, time, id, dispatch]);
   // 24 hours to 12 hours system
   function tConvert(time) {
     // Check correct time format and split into components

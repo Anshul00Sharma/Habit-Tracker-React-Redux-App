@@ -6,7 +6,6 @@ body {
   font-family: "Righteous";
   color: #004526;
   user-select: none;
-  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./flowers-6597862.svg");

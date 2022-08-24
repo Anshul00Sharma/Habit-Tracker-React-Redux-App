@@ -3,7 +3,7 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 // dummy value
 const hardcodedBabits = [
   {
-    goalId: "1",
+    goalId: 1,
     goalName: "Coding",
     dueTime: "10:00",
     week: [
@@ -17,7 +17,7 @@ const hardcodedBabits = [
     ],
   },
   {
-    goalId: "2",
+    goalId: 2,
     goalName: "Gym",
     dueTime: "11:00",
     week: [
@@ -31,7 +31,7 @@ const hardcodedBabits = [
     ],
   },
   {
-    goalId: "3",
+    goalId: 3,
     goalName: "No Gym",
     dueTime: "17:00",
     week: [
@@ -93,21 +93,21 @@ const goalSlice = createSlice({
     habitDeleted(state, action) {
       const id = action.payload;
       console.log("habitDelted", state[0].goalName);
-      const updatedState = state.filter((goal) => goal.goalId != id);
+      const updatedState = state.filter((goal) => goal.goalId !== id);
       window.localStorage.setItem("newHabits", JSON.stringify(updatedState));
       return updatedState;
     },
     // chaning status
     changeStatus(state, { payload }) {
       const { id, day, status } = payload;
-      const habit = state.find((goal) => goal.goalId == id);
+      const habit = state.find((goal) => goal.goalId === id);
       console.log("changeStatus", habit);
       habit.week.forEach((element) => {
         if (element.day === day) {
           element.status = status;
         }
       });
-      const after = state.find((goal) => goal.goalId == id);
+      const after = state.find((goal) => goal.goalId === id);
       after.week.forEach((element) => {
         console.log("day:", element.day, " status :", element.status);
       });
@@ -116,14 +116,14 @@ const goalSlice = createSlice({
     // editing title
     editTitle(state, { payload }) {
       const { id, title } = payload;
-      const habit = state.find((goal) => goal.goalId == id);
+      const habit = state.find((goal) => goal.goalId === id);
       habit.goalName = title;
       window.localStorage.setItem("newHabits", JSON.stringify(state));
     },
     // editing due time
     editTime(state, { payload }) {
       const { id, time } = payload;
-      const habit = state.find((goal) => goal.goalId == id);
+      const habit = state.find((goal) => goal.goalId === id);
       habit.dueTime = time;
       window.localStorage.setItem("newHabits", JSON.stringify(state));
     },

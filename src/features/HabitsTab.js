@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import Habit from "./Habit";
 // redering habitTab
 const HabitsTab = ({ goals }) => {
-  const id = useParams().id;
+  const id = Number(useParams().id);
   // finding habit with id
-  const habit = goals.find((habit) => habit.goalId == id);
+  console.log("Type", typeof id);
+  const habit = goals.find((habit) => habit.goalId === id);
   return (
     <>
       <div style={styles.main}>
