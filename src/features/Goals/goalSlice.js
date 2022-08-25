@@ -5,7 +5,7 @@ const initialState = [
   {
     goalId: 1,
     goalName: "Coding",
-    dueTime: "10:00",
+    dueTime: "10:00AM",
     week: [
       { day: "Mon", status: "none" },
       { day: "Tue", status: "none" },
@@ -19,7 +19,7 @@ const initialState = [
   {
     goalId: 2,
     goalName: "Gym",
-    dueTime: "11:00",
+    dueTime: "11:00PM",
     week: [
       { day: "Mon", status: "none" },
       { day: "Tue", status: "none" },
@@ -33,7 +33,7 @@ const initialState = [
   {
     goalId: 3,
     goalName: "No Gym",
-    dueTime: "17:00",
+    dueTime: "1:00AM",
     week: [
       { day: "Mon", status: "none" },
       { day: "Tue", status: "none" },
@@ -45,6 +45,21 @@ const initialState = [
     ],
   },
 ];
+// 24 hours to 12 hours function
+function tConvert(time) {
+  // Check correct time format and split into components
+  time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [
+    time,
+  ];
+
+  if (time.length > 1) {
+    // If time format correct
+    time = time.slice(1); // Remove full string match value
+    time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join(""); // return adjusted time or original string
+}
 
 // let initialState = [...habitsFromStorage];
 
@@ -65,6 +80,7 @@ const goalSlice = createSlice({
         console.log("this is goal added", state.payload);
       },
       prepare(goalName, goalId, dueTime) {
+        dueTime = tConvert(dueTime);
         return {
           payload: {
             id: nanoid(),
