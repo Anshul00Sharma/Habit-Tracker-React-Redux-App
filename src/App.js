@@ -9,7 +9,7 @@ import { Route, Routes } from "react-router-dom";
 // importing habiit tab
 import HabitsTab from "./features/HabitsTab";
 // redux state management
-import { selectAllGoals } from "./features/Goals/goalSlice";
+import { selectAllGoals } from "./features/goalSlice";
 import { useSelector } from "react-redux";
 // rendering app
 function App() {

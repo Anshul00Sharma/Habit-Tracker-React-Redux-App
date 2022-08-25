@@ -1,5 +1,5 @@
 // importing goal List
-import GoalList from "./Goals/GoalList";
+import GoalList from "./GoalList";
 // icons
 import { FaPlus } from "react-icons/fa";
 // state management
@@ -9,9 +9,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 // redux state management
-import { goalAdded } from "./Goals/goalSlice";
+
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllGoals } from "./Goals/goalSlice";
+import { selectAllGoals, goalAdded } from "./goalSlice";
 // notification
 import { NotificationManager } from "react-notifications";
 // time picker

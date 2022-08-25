@@ -1,7 +1,7 @@
 //  importing redux slice
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 // dummy value
-const initialState = [
+const dummyValue = [
   {
     goalId: 1,
     goalName: "Coding",
@@ -61,7 +61,11 @@ function tConvert(time) {
   return time.join(""); // return adjusted time or original string
 }
 
-// let initialState = [...habitsFromStorage];
+const habitsFromStorage = localStorage.getItem("newHabits")
+  ? JSON.parse(localStorage.getItem("newHabits"))
+  : dummyValue;
+
+let initialState = [...habitsFromStorage];
 
 // all redux state handling
 const goalSlice = createSlice({
@@ -72,10 +76,10 @@ const goalSlice = createSlice({
     goalAdded: {
       reducer(state, { payload }) {
         state.push(payload);
-        // window.localStorage.setItem(
-        //   "newHabits",
-        //   JSON.stringify([...initialState, payload])
-        // );
+        window.localStorage.setItem(
+          "newHabits",
+          JSON.stringify([...initialState, payload])
+        );
 
         console.log("this is goal added", state.payload);
       },
@@ -105,7 +109,7 @@ const goalSlice = createSlice({
       const id = action.payload;
       console.log("habitDelted", state[0].goalName);
       const updatedState = state.filter((goal) => goal.goalId !== id);
-      // window.localStorage.setItem("newHabits", JSON.stringify(updatedState));
+      window.localStorage.setItem("newHabits", JSON.stringify(updatedState));
       return updatedState;
     },
     // chaning status
@@ -122,21 +126,22 @@ const goalSlice = createSlice({
       after.week.forEach((element) => {
         console.log("day:", element.day, " status :", element.status);
       });
-      // window.localStorage.setItem("newHabits", JSON.stringify(state));
+      window.localStorage.setItem("newHabits", JSON.stringify(state));
     },
     // editing title
     editTitle(state, { payload }) {
       const { id, title } = payload;
       const habit = state.find((goal) => goal.goalId === id);
       habit.goalName = title;
-      // window.localStorage.setItem("newHabits", JSON.stringify(state));
+      window.localStorage.setItem("newHabits", JSON.stringify(state));
     },
     // editing due time
     editTime(state, { payload }) {
       const { id, time } = payload;
+      let duetime = tConvert(time);
       const habit = state.find((goal) => goal.goalId === id);
-      habit.dueTime = time;
-      // window.localStorage.setItem("newHabits", JSON.stringify(state));
+      habit.dueTime = duetime;
+      window.localStorage.setItem("newHabits", JSON.stringify(state));
     },
   },
 });

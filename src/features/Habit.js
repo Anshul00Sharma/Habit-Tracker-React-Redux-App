@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 // redux state
 import { useDispatch } from "react-redux";
-import { changeStatus, editTitle, editTime } from "./Goals/goalSlice";
+import { changeStatus, editTitle, editTime } from "./goalSlice";
 // icons
 import { FcOk, FcCancel, FcCheckmark } from "react-icons/fc";
 import { FaTimes, FaCheck } from "react-icons/fa";
@@ -26,6 +26,7 @@ const Habit = ({ habit, id }) => {
 
   // edit Handlers
   const timeEditHandler = () => {
+    setTime(habit.dueTime);
     setOnEditTime(true);
   };
   const saveEditTimeHandler = () => {

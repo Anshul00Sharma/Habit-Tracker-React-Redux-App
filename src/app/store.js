@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import goalReducer from "../features/Goals/goalSlice";
+import goalReducer from "../features/goalSlice";
 
 // store configuration
 export const store = configureStore({
