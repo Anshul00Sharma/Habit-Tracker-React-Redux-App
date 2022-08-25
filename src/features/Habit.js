@@ -23,9 +23,7 @@ const Habit = ({ habit, id }) => {
   const [onEdit, setOnEdit] = useState(false);
   const [time, setTime] = useState(habit.dueTime);
   const [onEditTime, setOnEditTime] = useState(false);
-  useEffect(() => {
-    dispatch(editTime({ id, time }));
-  }, [setTime, time, id, dispatch]);
+
   // 24 hours to 12 hours system
   function tConvert(time) {
     // Check correct time format and split into components
@@ -49,6 +47,7 @@ const Habit = ({ habit, id }) => {
     setOnEditTime(true);
   };
   const saveEditTimeHandler = () => {
+    dispatch(editTime({ id, time }));
     setOnEditTime(false);
   };
   const editHandler = () => {
@@ -162,7 +161,7 @@ const Habit = ({ habit, id }) => {
       ) : (
         <div style={styles.timeDiv}>
           <span onDoubleClick={timeEditHandler} style={styles.time}>
-            Daily Due Time : {dueTime}
+            Daily Due Time : {habit.dueTime}
           </span>
         </div>
       )}
